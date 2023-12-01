@@ -8,3 +8,9 @@
   padding: 1em;
   border-bottom: .5px solid #222333;
 }
+
+.image {
+  filter: invert(1);
+  width: 100%;
+  height: 100%;
+}

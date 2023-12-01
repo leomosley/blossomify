@@ -8,8 +8,8 @@ function Header() {
     <div className={styles.container}>
       <Link className={styles.logo} href='/'> 
         <img 
-          className={styles.svg}
-          src={logo}
+          className={styles.image}
+          src='https://www.svgrepo.com/show/512258/flower-92.svg'
         />
       </Link>
     </div>
