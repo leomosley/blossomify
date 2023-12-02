@@ -1,0 +1,49 @@
+.container {
+  width: 100%;
+  display: flex;
+  gap: 1em;
+}
+
+.left {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5em;
+  width: 60%;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: .5em;
+  width: 40%;
+}
+
+.box {
+  padding: .5em;
+  box-sizing: border-box;
+  width: calc(50% - 1em)
+}
+
+.box.message {
+  flex-grow: 2;
+}
+
+.label {
+  color: var(--text);
+  margin: 0;
+  letter-spacing: -1px;;
+}
+
+.input {
+  font-family: var(--font);
+  padding: .5em;
+  border-radius: .5em;
+  border: none;
+  color: var(--background);
+  width: 90%;
+}
+
+.input.message {
+  height: 5em;
+}

@@ -6,6 +6,7 @@
   --primary: #6d44a7;
   --secondary: #2d132f;
   --accent: #b155b9;
+  --font: 'Inter';
 }
 
 /* Light Theme
@@ -18,13 +19,18 @@
 } */
 
 body {
-  font-family: 'Inter';
+  font-family: var(--font);
   font-weight: 400;
   background: var(--background);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: 'Inter';
+  font-family: var(--font);
   font-weight: 700;
 }
 
