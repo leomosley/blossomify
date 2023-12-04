@@ -23,6 +23,32 @@ export default function Form() {
     setLink(url);
   }
 
+  const ColourSelector = () => {
+    const colours: string[] = [
+      '#C5FFF8', '#8ADAB2',  '#FED9ED', 
+      '#BEADFA', '#8CABFF', '#FF90BC', 
+      '#B15EFF',  '#AF2655', 
+    ];
+    return (
+      <div className={styles.colours}>
+        {colours.map((colour, i) => (
+          <button 
+            className={styles.colourButton}
+            style={{
+              background: colour
+            }}
+            onClick={(e) => setColour(colours[i])}
+          ></button>
+        ))}
+        <input 
+          className={`${styles.colourButton} ${styles.custom}`} 
+          type='color' 
+          onChange={(e) => setColour(e.target.value)}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -52,29 +78,20 @@ export default function Form() {
         </div>
       </div>
       <div className={styles.right}>
-          <div className={styles.box}>
-            <h5 className={styles.label}>Flower</h5>
-            <input 
-              className={styles.input} 
-              type='number'
-              onChange={(e) => setFlower(e.target.valueAsNumber)}
-            />
-          </div>
-          <div className={styles.box}>
-            <h5 className={styles.label}>Colour</h5>
-            <input 
-              className={styles.input} 
-              type='color'
-              onChange={(e) => setColour(e.target.value)}
-            />
-          </div>
-          <div className={styles.box}>
-            <button
-              className={styles.button} 
-              onClick={handleSubmit}
-            ></button>
-            {link? <Link href={link}>Link</Link> : <></>}
-          </div>
+        <div className={styles.selector}>
+        </div>
+        <div className={styles.selector}>
+          <ColourSelector />
+        </div>
+      </div>
+      <div className={styles.bottom}>
+        <div className={styles.box}>
+          <button
+            className={styles.button} 
+            onClick={handleSubmit}
+          ></button>
+          {link? <Link href={link}>Link</Link> : <></>}
+        </div>
       </div>
     </div>
   )

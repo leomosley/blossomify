@@ -23,11 +23,10 @@ type Config = {
 }
 
 type FollowMouseProps = {
-  pathName: string;
   colour?: string;
 };
 
-export default function FollowMouse({ pathName, colour}: FollowMouseProps) {
+export default function FollowMouse({ colour }: FollowMouseProps) {
   const [mousePosition, setMousePosition] = useState<Position>({});
   const [lastPosition, setLastPosition] = useState<LastPosition>({
     flowerTimestamp: new Date().getTime(),
@@ -37,8 +36,8 @@ export default function FollowMouse({ pathName, colour}: FollowMouseProps) {
 
   const config: Config = {
     flowerAnimationDuration: 1500,
-    minTimeBetweenFlowers: 200,
-    minDistBetweenFlowers: 50,
+    minTimeBetweenFlowers: 250,
+    minDistBetweenFlowers: 750,
     sizes: ['1.2rem', '1rem', '0.6rem'],
     animations: [styles.fallone, styles.falltwo, styles.fallthree],
     src: 'https://www.svgrepo.com/show/165289/flower-with-rounded-petals.svg'
@@ -71,31 +70,25 @@ export default function FollowMouse({ pathName, colour}: FollowMouseProps) {
         y: e.clientY - offset
       }
       
-      if (pathName === 'home') {
-        setTimeout(() => {
-          setMousePosition(mousePos);
-        }, 100);
-      } else {
-        setLastPosition((prev) => ({
-          ...prev,
-          flowerPosition: mousePos
+      setLastPosition((prev) => ({
+        ...prev,
+        flowerPosition: mousePos
+      }));
+
+      const now = new Date().getTime();
+      const hasBeenLongEnough = now - (lastPosition.flowerTimestamp ?? 0) > config.minTimeBetweenFlowers;
+      const hasMovedFarEnough = Math.sqrt(
+        Math.pow((lastPosition.flowerPosition.x ?? 0) - mousePos.x, 2) +
+        Math.pow((lastPosition.flowerPosition.y ?? 0)- mousePos.y, 2)
+      ) >= config.minDistBetweenFlowers;
+
+      if (hasMovedFarEnough || hasBeenLongEnough) {
+        createFlower(mousePos);
+        setLastPosition((prevLast) => ({
+          ...prevLast,
+          flowerPosition: mousePos,
+          flowerTimestamp: now,
         }));
-
-        const now = new Date().getTime();
-        const hasBeenLongEnough = now - (lastPosition.flowerTimestamp ?? 0) > config.minTimeBetweenFlowers;
-        const hasMovedFarEnough = Math.sqrt(
-          Math.pow((lastPosition.flowerPosition.x ?? 0) - mousePos.x, 2) +
-          Math.pow((lastPosition.flowerPosition.y ?? 0)- mousePos.y, 2)
-        ) >= config.minDistBetweenFlowers;
-
-        if (hasMovedFarEnough || hasBeenLongEnough) {
-          createFlower(mousePos);
-          setLastPosition((prevLast) => ({
-            ...prevLast,
-            flowerPosition: mousePos,
-            flowerTimestamp: now,
-          }));
-        }
       }
     };
 
@@ -104,11 +97,10 @@ export default function FollowMouse({ pathName, colour}: FollowMouseProps) {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [size, pathName, lastPosition]);
+  }, [size, lastPosition]);
 
   return (
     <div
-      className={(pathName === 'home')? styles.orb : styles.flowers}
       style={{
         display: (mousePosition.x)? 'flex' : 'none',
         position: 'absolute',

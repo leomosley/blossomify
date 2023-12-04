@@ -24,7 +24,7 @@ export default function DisplayMessage() {
       {flower}<br></br>
       {colour}<br></br>
     </div>
-    <FollowMouse pathName={'message'} />
+    <FollowMouse />
     </>
   )
 }

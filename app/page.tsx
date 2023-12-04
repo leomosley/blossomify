@@ -8,12 +8,11 @@ import styles from './page.module.css';
 export default function Home() {
   return (
     <>
-    <div className='mask'></div>
     <div className={styles.container}>
       <Header />
       <Form />
     </div>
-    <FollowMouse pathName='home' colour='purple' />
+    <FollowMouse colour='purple' />
     </>
   );
 }
