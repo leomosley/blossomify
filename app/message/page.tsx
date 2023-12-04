@@ -2,6 +2,8 @@
 import React from 'react';
 import { useSearchParams } from 'next/navigation';
 import styles from './page.module.css';
+import Header from '../components/Header';
+import FollowMouse from '../components/FollowMouse';
 
 export default function DisplayMessage() {
   const params = useSearchParams();
@@ -13,6 +15,9 @@ export default function DisplayMessage() {
   const colour = decodeURIComponent(params.get('colour') ?? '');
 
   return (
+    <>
+    <FollowMouse pathName={'message'} />
+    <Header />
     <div style={{ color: 'white'}}>
       {receiver}<br></br>
       {sender}<br></br>
@@ -20,5 +25,6 @@ export default function DisplayMessage() {
       {flower}<br></br>
       {colour}<br></br>
     </div>
+    </>
   )
 }

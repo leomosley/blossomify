@@ -7,25 +7,26 @@ type position = {
   y?: number;
 }
 
-export default function FollowMouse() {
-  const [mousePosition, setMousePosition] = useState<position>({});
-  const [inWindow, setInWindow] = useState<boolean>(true);
+type FollowMouseProps = {
+  pathName: string;
+  colour?: string;
+};
 
-  const size = 50;
+
+export default function FollowMouse({ pathName, colour}: FollowMouseProps) {
+  const [mousePosition, setMousePosition] = useState<position>({});
+
+  const size = pathName === 'home'? 1: 10;
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       let offset = size / 2;
-      if (inWindow) {
         setTimeout(() => {
           setMousePosition({ 
             x: e.clientX - offset, 
             y: e.clientY - offset
           });
-        }, 75);
-      } else {
-        setMousePosition({});
-      }
+        }, 100);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -33,28 +34,20 @@ export default function FollowMouse() {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [inWindow]);
-
-  const handleMouseLeave = () => {
-    setInWindow(false);
-  };
-
-  const handleMouseEnter = () => {
-    setInWindow(true);
-  };
+  }, [size]);
 
   return (
     <div
+      className={(pathName === 'home')? styles.orb : styles.flower}
       style={{
-        display: (mousePosition.x !== undefined && inWindow)? 'flex' : 'none',
+        display: (mousePosition.x)? 'flex' : 'none',
         position: 'absolute',
         left: mousePosition.x,
         top: mousePosition.y,
         width: size,
         height: size,
-        borderRadius: '100%',
-        backgroundColor: 'red',
-        zIndex: -1,
+        zIndex: '-10',
+        background: colour? colour : '',
       }}
     >
     </div>

@@ -1,0 +1,4 @@
+.orb {
+  border-radius: 100%;
+  box-shadow: 0 0 3em 1em purple; /* Adjust alpha values */
+}

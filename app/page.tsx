@@ -7,10 +7,13 @@ import styles from './page.module.css';
 
 export default function Home() {
   return (
+    <>
+    <div className={styles.mask}></div>
     <div className={styles.container}>
-      <FollowMouse />
       <Header />
       <Form />
     </div>
+    <FollowMouse pathName='home' colour='purple' />
+    </>
   );
 }
