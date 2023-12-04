@@ -54,6 +54,7 @@ export default function FollowMouse() {
         height: size,
         borderRadius: '100%',
         backgroundColor: 'red',
+        zIndex: -1,
       }}
     >
     </div>
