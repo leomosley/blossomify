@@ -16,7 +16,6 @@ export default function DisplayMessage() {
 
   return (
     <>
-    <FollowMouse pathName={'message'} />
     <Header />
     <div style={{ color: 'white'}}>
       {receiver}<br></br>
@@ -25,6 +24,7 @@ export default function DisplayMessage() {
       {flower}<br></br>
       {colour}<br></br>
     </div>
+    <FollowMouse pathName={'message'} />
     </>
   )
 }
