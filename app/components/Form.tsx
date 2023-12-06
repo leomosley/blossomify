@@ -25,19 +25,20 @@ export default function Form() {
 
   const ColourSelector = () => {
     const colours: string[] = [
-      '#C5FFF8', '#8ADAB2',  '#FED9ED', 
-      '#BEADFA', '#8CABFF', '#FF90BC', 
+      '#C5FFF8', '#8ADAB2',  '#8CABFF', 
+      '#FF90BC', '#FED9ED', '#BEADFA', 
       '#B15EFF',  '#AF2655', 
     ];
+
     return (
       <div className={styles.colours}>
-        {colours.map((colour, i) => (
+        {colours.map((c, i) => (
           <button 
-            className={styles.colourButton}
+            className={`${styles.colourButton} ${colour === colours[i] ? styles.selected : ""} `}
             style={{
-              background: colour
+              background: colours[i]
             }}
-            onClick={(e) => setColour(colours[i])}
+            onClick={() => setColour(colours[i])}
           ></button>
         ))}
         <input 
@@ -49,48 +50,70 @@ export default function Form() {
     );
   }
 
+  const FlowerSelector = () => {
+    const flowers: string[] = [
+      "Tulip", "Rose",
+      "Lily", "Daisy"
+    ];
+
+    return (
+      <div className={styles.flowers}>
+        {flowers.map((f, i) => (
+          <button
+            className={`${styles.flowerButton} ${flower === i ? styles.selected : ""}`}
+            onClick={() => setFlower(i)}
+          >{f}</button>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
-      <div className={styles.left}>
-        <div className={styles.box}>
-          <h5 className={styles.label }>To</h5>
-          <input 
-            className={styles.input} 
-            placeholder='Who your sending it to' 
-            onChange={(e) => setReceiver(e.target.value)}
-          />
+      <div className={styles.top}>
+        <div className={styles.left}>
+          <div className={styles.box}>
+            <h5 className={styles.label }>To</h5>
+            <input 
+              className={styles.input} 
+              placeholder='Who your sending it to' 
+              onChange={(e) => setReceiver(e.target.value)}
+            />
+          </div>
+          <div className={styles.box}>
+            <h5 className={styles.label}>From</h5>
+            <input 
+              className={styles.input} 
+              placeholder='Your name'
+              onChange={(e) => setSender(e.target.value)}
+            />
+          </div>
+          <div className={`${styles.box} ${styles.message}`}>
+            <h5 className={styles.label}>Message</h5>
+            <textarea 
+              className={`${styles.input} ${styles.message}`} 
+              placeholder='Your message'
+              onChange={(e) => setMessage(e.target.value)}
+              
+            />
+          </div>
         </div>
-        <div className={styles.box}>
-          <h5 className={styles.label}>From</h5>
-          <input 
-            className={styles.input} 
-            placeholder='Your name'
-            onChange={(e) => setSender(e.target.value)}
-          />
-        </div>
-        <div className={`${styles.box} ${styles.message}`}>
-          <h5 className={styles.label}>Message</h5>
-          <textarea 
-            className={`${styles.input} ${styles.message}`} 
-            placeholder='Your message'
-            onChange={(e) => setMessage(e.target.value)}
-          />
-        </div>
-      </div>
-      <div className={styles.right}>
-        <div className={styles.selector}>
-        </div>
-        <div className={styles.selector}>
-          <ColourSelector />
+        <div className={styles.right}>
+          <div className={styles.selector}>
+            <FlowerSelector />
+          </div>
+          <div className={styles.selector}>
+            <ColourSelector />
+          </div>
         </div>
       </div>
       <div className={styles.bottom}>
-        <div className={styles.box}>
+        <div className={styles.submit}>
           <button
             className={styles.button} 
             onClick={handleSubmit}
-          ></button>
-          {link? <Link href={link}>Link</Link> : <></>}
+          >Generate Link</button>
+          {link? <Link className={styles.button} href={link}>Open</Link> : <></>}
         </div>
       </div>
     </div>

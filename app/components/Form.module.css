@@ -1,6 +1,12 @@
 .container {
   width: 100%;
   display: flex;
+  flex-direction: column;
+}
+
+.top, .bottom {
+  width: 100%;
+  display: flex;
 }
 
 .left {
@@ -14,6 +20,7 @@
   display: flex;
   flex-direction: column;
   width: 20%;
+  min-width: calc(100px + 1em);
 }
 
 .box {
@@ -21,6 +28,7 @@
 }
 
 .box.message {
+  margin-top: calc(2em - 5px);
   flex-grow: 2;
 }
 
@@ -40,21 +48,21 @@
 }
 
 .input.message {
-  height: calc(100px - 0.5em);
+  height: 100px;
+  resize: none;
 }
 
 .selector {
-  width: 90px;
-  aspect-ratio: 1;
+  margin-bottom: 1em;
 }
 
 .colours {
   display: flex;
   flex-wrap: wrap;
   background: white;
-  width: 100%;
+  width: 100px;
   aspect-ratio: 1;
-  padding: 0.5em;
+  padding: .5em;
   gap: 10px;
   border-radius: .5em;
   justify-content: center;
@@ -67,4 +75,55 @@
   height: 20px;
   border-radius: 0.25em;
   margin: 0;
+}
+
+.flowers {
+  display: flex;
+  flex-wrap: wrap;
+  background: white;
+  width: 100px;
+  aspect-ratio: 1;
+  padding: .5em;
+  gap: 10px;
+  border-radius: .5em;
+  justify-content: center;
+  align-items: center;
+}
+
+.selected {
+  border: solid #5c5c5c 0.05em;
+}
+
+.bottom {
+  justify-content: right;
+}
+
+.submit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5em;
+}
+
+.button {
+  width: calc(100px + 1em);
+  padding: 0.5em;
+  background-color: var(--text);
+  color: var(--background);
+  font-size: 0.9em;
+  font-weight: 700;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: .5em;
+  border: none;
+  transition: .3s ease-in-out;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.button:hover {
+  background-color: var(--background);
+  color: var(--text);
+  border: .05em solid var(--text);
 }
